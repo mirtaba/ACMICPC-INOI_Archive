@@ -1,0 +1,55 @@
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+const int maxN = 1000;
+pair <int,pair<int,int> > e[maxN];
+int par[maxN];
+int size[maxN];
+
+int father (int x)
+{
+	if (par[x] == -1) return x;
+	return par[x] = father (par[x]);
+}
+
+int merge (int i)
+{
+    int a = e[i].second.first;
+    int b = e[i].second.second;
+    int c = e[i].first;
+    //int aa = a;
+    //int bb = b;
+	a = father (a);
+	b = father (b);
+	if (a == b)
+        return 0;
+	if (size[a] > size[b])
+        swap (a, b);
+	par[a] = b;
+	size[b] += size[a];
+	return c;
+}
+
+int main()
+{
+	int n, m;
+	cin >> n >> m;
+	for (int i = 0; i < m; i++)
+	{
+	    int u, v, w;
+	    cin >> u >> v >> w;
+	    e[i] = make_pair(w, make_pair(u, v));
+	}
+	for (int i = 1 ; i <= n ; i++)
+	{
+	    size[i] = 1;
+	    par[i] = -1;
+	}
+	int res = 0;
+	sort (e, e + m);
+	for (int i = 0; i < m; i++)
+		res += merge (i);
+    cout << res << endl;
+	return 0;
+}

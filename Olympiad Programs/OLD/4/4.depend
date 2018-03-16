@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1341310866 source:e:\olympiad programs\4\main.cpp
+	<iostream>
+	<cstdio>
+	<algorithm>
+	<string>
+	<map>
+	<cmath>
+	<set>
+	<vector>
+

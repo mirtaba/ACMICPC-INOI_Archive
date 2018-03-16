@@ -1,0 +1,51 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <cstring>
+
+using namespace std;
+
+const int Maxn=1E4+25;
+
+vector <int> answer;
+int coins [Maxn],X;
+short N;
+bool cando[Maxn][Maxn];
+
+bool candoit(int coinnum)
+{
+	memset(cando , 0 , sizeof cando);
+	cando[0][0]=true;
+	for (int i=0;i<=N;i++)
+	{
+		for(int j=0;j<=X;j++)
+		{
+			if ((i!=coinnum)&&( cando[j][i-1] || (j-coins[i-1])>=0 && cando[j-coins[i-1]][i-1]))
+				cando[j][i]=true;
+		}
+	}
+	for (int i=0;i<N;i++)
+	if (cando[X][i])
+		return false;
+	return true;
+}
+int main()
+{
+	ios::sync_with_stdio(0);
+	cin >> N >> X;
+	for (int i=0;i<N;i++)
+	{
+		cin >> coins[i];
+	}
+	for (int i=0;i<N;i++)
+	{
+		if (candoit(i))
+			answer.push_back(i);
+	}
+	cout << answer.size() << endl;
+	cout << coins[answer[0]];
+	for(int i=1;i< answer.size();i++)
+	{
+		cout << " "<<coins[answer[i]] ;
+	}
+}

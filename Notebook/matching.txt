@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int MAXN = 1000;
+
+// match[i] = # rasi ke ba ras i az bakhsh bala E match mishe.
+// dmatch[i] = # rasi ke ba ras i az bakhsh payin E match mishe. Avval kar -1 mishe.
+// mark[i] = mark vase ras haye bakhsh bala E. Ghabl az har DFS, hamaro 0 mikonim.
+// size = andaze maximum matching.
+
+int n, mark[MAXN], match[MAXN], dmatch[MAXN], size;
+vector <int> g[MAXN];
+
+bool dfs(int x)
+{
+	if (x == -1)
+		return 1;
+	if (mark[x])
+		return 0;
+	mark[x] = 1;
+	for (int i = 0 ; i < (int)g[x].size() ; i++)
+	{
+		int u = g[x][i];
+		if (dfs(dmatch[u]))
+		{
+			match[x] = u;
+			dmatch[u] = x;
+			return 1;
+		}
+	}
+	return 0;
+}
+
+int main()
+{
+	cin >> n;
+	for (int i = 1 ; i <= n ; i++)
+		dmatch[i] = -1;
+	for (int i = 1 ; i <= n ; i++)
+	{
+		memset(mark, 0, sizeof(mark));
+		size += dfs(i);
+	}
+	cout << size << endl;
+	return 0;
+}

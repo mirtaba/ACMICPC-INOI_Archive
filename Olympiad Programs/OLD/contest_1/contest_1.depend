@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1341301682 source:e:\olympiad programs\contest_1\main.cpp
+	<iostream>
+
+1341302352 source:e:\olympiad programs\contest_1\2.cpp
+	<iostream>
+	<cstdio>
+	<algorithm>
+	<cstring>
+	<string>
+	<cctype>
+	<stack>
+	<queue>
+	<list>
+	<vector>
+	<map>
+	<sstream>
+	<cmath>
+	<bitset>
+	<utility>
+	<set>
+	<numeric>
+
